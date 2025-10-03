@@ -1,0 +1,62 @@
+---
+title: "eds-223-week1-discussion"
+format: html
+---
+# Part 1
+Load the neccessary packages. 
+```{r}
+library(here)
+library(tidyverse)
+library(sf)
+library(stars)
+library(tmap)
+```
+
+Next, read in the necessary files. 
+```{r}
+ei_points <- st_read(here("data", "easter_island", "ei_points.gpkg")) |> 
+  filter(type == "volcano")
+ei_elev <- read_stars(here("data", "easter_island", "ei_elev.tif"))
+ei_borders <- st_read(here("data", "easter_island", "ei_border.gpkg"))
+ei_roads <- st_read(here("data", "easter_island", "ei_roads.gpkg"))
+```
+
+## Creating a single-object map 
+Use tm_shape() + tm_borders() to create a map outline of Rapa Nui.
+```{r}
+tm_shape(ei_borders) + tm_borders()
+```
+
+## Create a multiple-object map with tmap
+Expand on your single-object map to create a map of Rapa Nui and…
+
+…denote the island’s borders and continuous elevation
+…denote the island’s volcanoes and roads
+…play with the color palette and essential map elements
+```{r}
+#palette_colors = c("#470C00", "#751400", "#A31B00", "#FF512E", )
+#ei_elev, palette =
+tm_shape(ei_borders) + tm_borders() + tm_shape(ei_elev) + 
+  #tm_layout() 
+   tm_raster(col.scale  = tm_scale(values = c("brown", "red")), col.legend = tm_legend(title = "Elevation (m)")) + tm_shape(ei_roads) + tm_layout() + tm_lines() + 
+  tm_shape(ei_points) + tm_symbols(shape = 24, size = .7, fill = "orange")+ tm_text("name", size = .7, col = "white") + tm_layout(outer.bg.color = "beige")
+
+```
+
+#Create an interactive map with tmap
+Let's make this interactive with tmap_view(). 
+```{r}
+tmap_mode("view")
+
+tm_shape(ei_borders) + tm_borders() + tm_shape(ei_elev) + 
+  #tm_layout() 
+   tm_raster(col.scale  = tm_scale(values = c("brown", "red")), col.legend = tm_legend(title = "Elevation (m)")) + tm_shape(ei_roads) + tm_layout() + tm_lines() + 
+  tm_shape(ei_points) + tm_polygons() + tm_symbols(shape = 24, size = .7, fill = "orange")+ tm_text("name", size = .7, col = "white") + tm_layout(outer.bg.color = "beige")
+
+
+
+
+```
+
+
+
