@@ -51,12 +51,16 @@ tmap_mode("view")
 tm_shape(ei_borders) + tm_borders() + tm_shape(ei_elev) + 
   #tm_layout() 
    tm_raster(col.scale  = tm_scale(values = c("brown", "red")), col.legend = tm_legend(title = "Elevation (m)")) + tm_shape(ei_roads) + tm_layout() + tm_lines() + 
-  tm_shape(ei_points) + tm_polygons() + tm_symbols(shape = 24, size = .7, fill = "orange")+ tm_text("name", size = .7, col = "white") + tm_layout(outer.bg.color = "beige")
-
-
-
+  tm_shape(ei_points) +
+  #tm_polygons() +
+  tm_symbols(shape = 24, size = "sv", col = "black", fill = "orange", fill.legend = tm_legend(title = "Volcano Classification")) + 
+  tm_text("name", size = .7, col = "white") + tm_layout(outer.bg.color = "beige") 
 
 ```
 
+## Using ggplot to create a map
+```{r}
+ggplot(data = )
+```
 
 
