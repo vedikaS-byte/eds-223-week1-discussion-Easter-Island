@@ -38,15 +38,15 @@ Expand on your single-object map to create a map of Rapa Nui and…
 #ei_elev, palette =
 tm_shape(ei_borders) + tm_borders() + tm_shape(ei_elev) + 
   #tm_layout() 
-   tm_raster(col.scale  = tm_scale(values = c("brown", "red")), col.legend = tm_legend(title = "Elevation (m)")) + tm_shape(ei_roads) + tm_layout() + tm_lines() + 
-  tm_shape(ei_points) + tm_symbols(shape = 24, size = .7, fill = "orange")+ tm_text("name", size = .7, col = "white") + tm_layout(outer.bg.color = "beige")
+   tm_raster(col.scale  = tm_scale(values = c("darkgreen", "lightgreen")), col.legend = tm_legend(title = "Elevation (m)")) + tm_shape(ei_roads) + tm_layout() + tm_lines() + 
+  tm_shape(ei_points) + tm_symbols(shape = 24, size = .7, fill = "red")+ tm_text("name", size = .7, col = "black") + tm_layout(outer.bg.color = "beige")
 
 ```
 
 #Create an interactive map with tmap
 Let's make this interactive with tmap_view(). 
 ```{r}
-tmap_mode("view")
+tmap_mode("plot")
 
 tm_shape(ei_borders) + tm_borders() + tm_shape(ei_elev) + 
   #tm_layout() 
@@ -56,11 +56,20 @@ tm_shape(ei_borders) + tm_borders() + tm_shape(ei_elev) +
   tm_symbols(shape = 24, size = "sv", col = "black", fill = "orange", fill.legend = tm_legend(title = "Volcano Classification")) + 
   tm_text("name", size = .7, col = "white") + tm_layout(outer.bg.color = "beige") 
 
+
+tm_shape(ei_borders) + tm_borders() + tm_shape(ei_elev) + 
+  #tm_layout() 
+   tm_raster(col.scale  = tm_scale(values = c("darkgreen", "lightgreen")), col.legend = tm_legend(title = "Elevation (m)")) + tm_shape(ei_roads) + tm_layout() + tm_lines() + 
+  tm_shape(ei_points) + tm_symbols(shape = 24, size = .7, fill = "red")+ tm_text("name", size = .7, col = "black") + tm_layout(outer.bg.color = "beige", bg.color = "lightblue")
+
+
+
+
 ```
 
 ## Using ggplot to create a map
 ```{r}
-ggplot(data = )
+ggplot(data = ei_borders) + geom_sf() 
 ```
 
 
